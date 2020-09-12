@@ -929,7 +929,7 @@ app.get("/delete",function(req,res){
           console.log("Deleted Account");
         }
       });
-      if(req.User.Mode == "Buyer"){
+      if(req.user.Mode == "Buyer"){
         BuyerProducts.deleteOne({Username : req.user.Username},function(err){
           if(!err){
             console.log("Deleted Account");
