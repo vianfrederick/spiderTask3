@@ -1688,25 +1688,42 @@ app.post("/dashboard/SearchResultsBuyer",function(req,res){
   }
 })
 
-// app.get("/graph",function(req,res){
-//   if(req.isAuthenticated()){
-//     var finalArray = []
-//     BuyerProducts.find({},function(err,foundPerson){
-//       if(!err){
-//         if(foundPerson){
-//           foundPerson.forEach(function(e){
-//             for(var i =0;i <e.OrderHistory.length;i++){
-//               if(e.OrderHistory[i].SellerName == req.user.Username){
-//                 finalArray.push(e.OrderHistory[i]);
-//               }
-//             }
-//           });
-//           console.log(finalArray);
-//         }
-//       }
-//     })
-//   }
-// })
+app.get("/graph",function(req,res){
+  if(req.isAuthenticated()){
+    var finalArray = []
+    BuyerProducts.find({},function(err,foundPerson){
+      if(!err){
+        if(foundPerson){
+          foundPerson.forEach(function(e){
+            for(var i =0;i <e.OrderHistory.length;i++){
+              if(e.OrderHistory[i].SellerName == req.user.Username){
+                finalArray.push(e.OrderHistory[i]);
+              }
+            }
+          });
+          var currentdate = new Date();
+          arr1 = [];
+          arr2 =[];
+          for(var k=0;k<7;k++){
+          var datetime1 = (currentdate.getDate() - k) + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getFullYear();
+              arr1.push(datetime1);
+              const check = finalArray.filter(s => s.Date.includes(datetime1));
+              var count2 = 0;
+              check.forEach(function(e){
+                count2 = count2 + parseInt(e.Quantity);
+
+              });
+              arr1.push(count2);
+}
+res.render("graph",{details : arr1});
+
+        }
+      }
+    })
+  }
+})
 
 
 

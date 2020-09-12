@@ -4,13 +4,18 @@
     <meta charset="utf-8">
     <title>WhiteFalls</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <style media="screen">
+      canvas{
+        font-size : 50px;
+      }
+    </style>
   </head>
   <body>
     <canvas id="canvas" width="300" height="300"></canvas>
 
 <% for(var i = 0;i <details.length; i++){ %>
-    <input type="hidden" name="" value="<%= details[i].ProductNameForPurchase %>">
-    <input type="hidden" name="" value="<%= details[i].QuantityPurchased %>">
+    <input type="hidden" name="" value="<%= details[i] %>">
+
 
   <% } %>
     <script type="text/javascript">
@@ -35,7 +40,7 @@ var chart = new Chart(ctx, {
     data: {
         labels: datasArray,
         datasets: [{
-            label: 'My First dataset',
+            label: 'Graphical Analysis',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: valuesArray
@@ -43,7 +48,22 @@ var chart = new Chart(ctx, {
     },
 
     // Configuration options go here
-    options: {}
+    options: options = {
+  scales: {
+    yAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: 'Quantiy Sold'
+      }
+    }],
+    xAxes: [{
+      scaleLabel: {
+        display: true,
+        labelString: 'Date of Sell'
+      }
+    }]
+  }
+}
 });
 
 
