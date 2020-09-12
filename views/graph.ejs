@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>WhiteFalls</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="300" height="300"></canvas>
+
+<% for(var i = 0;i <details.length; i++){ %>
+    <input type="hidden" name="" value="<%= details[i].ProductNameForPurchase %>">
+    <input type="hidden" name="" value="<%= details[i].QuantityPurchased %>">
+
+  <% } %>
+    <script type="text/javascript">
+      var ctx = document.getElementById('canvas').getContext('2d');
+      var allValues = document.querySelectorAll("input");
+      var datasArray = [];
+      var valuesArray = [];
+      for(var j=0;j<allValues.length;j++){
+        if(j%2 == 0){
+          datasArray.push(allValues[j].value);
+        }
+        else{
+          valuesArray.push(allValues[j].value);
+        }
+
+      }
+var chart = new Chart(ctx, {
+
+    type: 'bar',
+
+
+    data: {
+        labels: datasArray,
+        datasets: [{
+            label: 'My First dataset',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: valuesArray
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+
+
+    </script>
+  </body>
+</html>

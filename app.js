@@ -1688,9 +1688,25 @@ app.post("/dashboard/SearchResultsBuyer",function(req,res){
   }
 })
 
-
-
-
+// app.get("/graph",function(req,res){
+//   if(req.isAuthenticated()){
+//     var finalArray = []
+//     BuyerProducts.find({},function(err,foundPerson){
+//       if(!err){
+//         if(foundPerson){
+//           foundPerson.forEach(function(e){
+//             for(var i =0;i <e.OrderHistory.length;i++){
+//               if(e.OrderHistory[i].SellerName == req.user.Username){
+//                 finalArray.push(e.OrderHistory[i]);
+//               }
+//             }
+//           });
+//           console.log(finalArray);
+//         }
+//       }
+//     })
+//   }
+// })
 
 
 

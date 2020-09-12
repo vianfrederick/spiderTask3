@@ -79,8 +79,8 @@ color: gray;
     <span class="navbar-toggler-icon"></span>
   </button>
   <div style="position:relative;" class="">
-    <form class="" action="/dashboard/SearchResults(buyer)" method="post">
-      <input list="autocomplete" class="form-control form-control-dark w-100" type="text" placeholder="Search Product Names" aria-label="Search">
+    <form class="" action="/dashboard/SearchResultsBuyer" method="post">
+      <input name="searchcartProduct" list="autocomplete" class="form-control form-control-dark w-100" type="text" placeholder="Search Product Names" aria-label="Search">
       <datalist id="autocomplete">
         <% AllProducts.forEach(function(product){ %>
           <option value=<%= product.ProductName %>  ></option>
