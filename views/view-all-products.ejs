@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>WhiteFalls</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style media="screen">
+
+  .product-table{
+    margin-top : 50px;
+  }
+
+  .heading{
+    margin-top : 100px;
+  }
+</style>
+</head>
+<body>
+
+<div style="border : 1px solid black; padding:10px; margin-top : 50px;  margin-bottom : 50px;" class="container">
+  <h1 style="margin-bottom:20px;" class="display-4 heading">All Products</h1>
+  <div  class="errors">
+    <% if(success_msg != ''){ %>
+      <h4 style = "background-color : lightgreen; padding-left : 20px;"><%= success_msg %></h4>
+  <%  } %>
+  </div>
+  <form class="" action="/dashboard/viewProducts/SearchResults" method="post">
+    <input autocomplete="off" list="autoComplete" type="text" name="searchProductName" value="" placeholder="Search for Product Ids" required="true">
+    <datalist id="autoComplete">
+      <% AllProducts.forEach(function(product){ %>
+        <option value=<%= product.ProductName %>  ></option>
+    <%  }); %>
+    </datalist>
+    <button class="btn btn-success" type="submit" name="button">Go</button>
+  </form>
+
+  <table  class="table table-bordered product-table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product ID</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">View</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if(AllProducts.length > 0){ %>
+      <% for(var i = 0; i < AllProducts.length ; i++){ %>
+        <tr>
+          <th scope="row"><%= i+1 %></th>
+          <td><%= AllProducts[i].ProductID %></td>
+          <td><%= AllProducts[i].ProductName %></td>
+          <td><form action="/dashboard/viewProducts/view/<%= AllProducts[i]._id %>" method="get">
+            <button class="btn btn-link" type="submit" name="viewButton" value="<%= i %>">View</button>
+          </form></td>
+          <td><form action="/dashboard/viewProducts/edit/<%= AllProducts[i]._id %> %>"  method="get">
+            <button onclick="cal()"  class="btn btn-link" type="submit" name="editButton" value="<%= i %>">Edit</button>
+          </form></td>
+          <td><form action="/dashboard/viewProducts/delete/<%= AllProducts[i]._id %> %>" method="get">
+            <button onclick="cal()" class="btn btn-link" type="submit" name="deleteButton" value="<%= i %>">Delete</button>
+          </form></td>
+
+
+        </tr>
+<%      }}  %>
+
+
+
+  </tbody>
+</table>
+<div style="margin-top : 100px;" class="container">
+
+  <button style="text-align: center; background-color : red; color : white;" type="button" class="btn btn-danger btn-link" data-toggle="modal" data-target="#exampleModal">
+    Clear All
+  </button>
+</div>
+<div style="margin-top : 100px;">
+  <a  href="/dashboard">Home</a>
+</div>
+</div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">Alert !!!!</h1>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Are you sure want to clear everything?</h5>
+      </div>
+      <div class="modal-footer">
+        <form class="" action="/dashboard/viewProducts/clearAll" method="get">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button type="submit" class="btn btn-primary">Yes, Proceed</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

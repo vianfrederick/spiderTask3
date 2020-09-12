@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>WhiteFalls</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style media="screen">
+
+  .product-table{
+    margin-top : 50px;
+  }
+
+  .heading{
+    margin-top : 100px;
+  }
+
+  .hide{
+    display: none;
+  }
+
+</style>
+</head>
+<body>
+
+<div style="border : 1px solid black; padding:10px; margin-top : 50px;  margin-bottom : 50px;" class="container">
+  <h1 style="margin-bottom:20px;" class="display-4 heading">My Cart</h1>
+  <div  class="errors">
+    <% if(success_msg != ''){ %>
+      <h4 style = "background-color : lightgreen; padding-left : 20px;"><%= success_msg %></h4>
+  <%  } %>
+  </div>
+  <form class="" action="/dashboard/myCart/SearchResults" method="get">
+    <input autocomplete="off" list="autoComplete" type="text" name="searchCartName" value="" placeholder="Search for Product Names" required="true">
+    <datalist id="autoComplete">
+      <% myCart.forEach(function(product){ %>
+        <option value=<%= product.ProductName %>  ></option>
+    <%  }); %>
+    </datalist>
+    <button class="btn btn-success" type="submit" name="button">Go</button>
+  </form>
+
+  <table  class="table table-bordered product-table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product ID</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">View</th>
+      <th scope="col">Edit Quantity</th>
+      <th scope="col">Remove</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if(myCart.length > 0){ %>
+      <% for(var i = 0; i < myCart.length ; i++){ %>
+        <tr>
+          <th scope="row"><%= i+1 %></th>
+          <td><%= myCart[i].ProductID %></td>
+          <td><%= myCart[i].ProductName %></td>
+          <td>
+            <button class="btn btn-link" type="button" name="viewButton" value="<%= i %>" data-toggle="modal" data-target="#<%= i %>">View</button>
+          </td>
+          <td>
+            <button class="btn btn-link" type="button" name="viewButton" value="<%= i %>" data-toggle="modal" data-target="#quant<%= i %>">Edit</button>
+          </td>
+          <td><form action="/dashboard/myCart/removeFromCart/<%= myCart[i].ProductID %>" method="get">
+            <button  class="btn btn-link" type="submit" name="deleteButton" value="<%= i %>">Remove from Cart</button>
+          </form></td>
+
+
+        </tr>
+
+        <div class="modal fade" id="quant<%= i %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 style="font-size : 37px;" class="modal-title" id="exampleModalLongTitle">Product Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <% var quantityAvailable; %>
+                 <% for(var k = 0; k < common.length; k ++){ %>
+                  <% if(myCart[i].ProductID == common[k].ProductID){ %>
+                  <%   quantityAvailable = common[k].Quantity; %>
+                   <% }} %>
+                   <form action="/dashboards/myCart/editQuantity" method="post" >
+
+
+                     <div class="form-group">
+                       <label style = "display : block;font-size : 20px;" for="editquantity">Quantity Available : <%= parseInt(quantityAvailable) + parseInt(myCart[i].Quantity) %></label>
+     <input style = "display : block;margin-top: 20px;margin-bottom: 27px;" type="number" min="1" max="<%= parseInt(quantityAvailable) + parseInt(myCart[i].Quantity) %>" value="<%= myCart[i].Quantity %>" name="editquantity">
+     <input style = "display : block;margin-top: 20px;margin-bottom: 27px;"  value="<%= parseInt(quantityAvailable) + parseInt(myCart[i].Quantity) %>" name="quantityAvailable" type="hidden">
+                     </div>
+
+
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                     <button name="clickedBtn" value="<%= myCart[i].ProductID %>" style="margin-left : 17%;" type="submit" class="btn btn-primary">Yes, Proceed</button>
+                   </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="<%= i %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Product Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+
+                    <div class="card-deck">
+
+                    <div class="col-lg-12">
+                      <div class="card">
+                        <img style = "text-align : center;"  src="../../../uploads/<%= myCart[i].Image %>" alt="No image">
+                        <div class="card-body">
+                          <h5 class="card-title">Name : <%= myCart[i].ProductName %></h5>
+                          <h5 class="card-title">Price : <%= myCart[i].Price %></h5>
+                          <h5 class="card-title">Quantity : <%= myCart[i].Quantity %></h5>
+                          <h5 class="card-title">Seller Name : <%= myCart[i].SellerName %></h5>
+                          <h5 class="card-title">Category : <%= myCart[i].Category %></h5>
+
+                          <p class="card-text">Description : <%= myCart[i].Description %></p>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+<%      }}  %>
+
+
+
+  </tbody>
+</table>
+<div style="margin-top : 100px; position : relative;" class="container">
+
+  <button style="text-align: center; background-color : red; color : white;" type="button" class="btn btn-danger btn-link" data-toggle="modal" data-target="#exampleModal">
+    Clear Cart
+  </button>
+  <form class="" action="/dashboard/mycart/checkout" method="get">
+    <button style="position: absolute;right: 1%;border: ;bottom: 1%;" class="btn btn-success" type="submit" name="button">Proceed To Checkout</button>
+  </form>
+</div>
+
+<div style="margin-top : 100px;">
+  <a  href="/dashboard">Home</a>
+</div>
+
+</div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">Alert !!!!</h1>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Are you sure want to clear everything?</h5>
+      </div>
+      <div class="modal-footer">
+        <form class="" action="/dashboard/mycart/clearAll" method="get">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button type="submit" class="btn btn-primary">Yes, Proceed</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

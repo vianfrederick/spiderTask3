@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="/images/favicon.ico">
+    <title></title>
+  </head>
+  <body>
+    <div  class="errors">
+      <% if(success_msg != ''){ %>
+        <h4 style = "background-color : lightgreen;"><%= success_msg %></h4>
+    <%  } %>
+    </div>
+    <div class="forgot">
+      <form class="" action="/forgotPassword/otp" method="post">
+        <input type="text" name="otp" value="" placeholder="Enter the OTP sent to the registered mail ID">
+        <button type="submit" name="button">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

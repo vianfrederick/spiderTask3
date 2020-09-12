@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>WhiteFalls</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style media="screen">
+
+  .product-table{
+    margin-top : 50px;
+  }
+
+  .heading{
+    margin-top : 100px;
+  }
+</style>
+</head>
+<body>
+
+<div style="border : 1px solid black; padding:10px; margin-top : 50px;  margin-bottom : 50px;" class="container">
+  <h1 style="margin-bottom:20px;" class="display-4 heading">Your Bill..</h1>
+
+
+
+  <table  class="table table-bordered product-table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Price (for 1)</th>
+      <th scope="col">Quantity Bought</th>
+      <th scope="col">Net Price</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <% if(bill.length > 0){ %>
+      <% for(var i = 0; i < bill.length ; i++){ %>
+        <tr>
+          <th scope="row"><%= i+1 %></th>
+          <td><%= bill[i].ProductName %></td>
+          <td><%= bill[i].Price %></td>
+          <td><%= bill[i].Quantity %></td>
+          <td><%= String(parseInt(bill[i].Quantity) * parseInt(bill[i].Price)) %></td>
+
+
+
+        </tr>
+<%      }}  %>
+
+
+<tr>
+  <td>#</td>
+  <td colspan="3" style="font-size: 41px;padding-left: 23%;">Amount to be Paid:</td>
+  <td style="font-weight: bolder;font-size: 35px;"><%= total %></td>
+</tr>
+
+
+  </tbody>
+</table>
+
+<div style="margin-top : 100px;">
+  <a  href="/dashboard">Home</a>
+</div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

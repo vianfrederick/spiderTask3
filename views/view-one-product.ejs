@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>WhiteFalls</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style media="screen">
+
+  .product-table{
+    margin-top : 50px;
+  }
+
+  .heading{
+    margin-top : 100px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="display-4 heading">Required Product</h1>
+
+  <table class="table table-bordered product-table">
+  <thead class="thead-dark">
+    <tr>
+
+      <th scope="col">Product ID</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Category</th>
+      <th scope="col">Image-File</th>
+    </tr>
+  </thead>
+  <tbody>
+
+        <tr>
+
+          <td><%= AllProducts.ProductID %></td>
+          <td><%= AllProducts.ProductName %></td>
+          <td><%= AllProducts.Price %></td>
+          <td><%= AllProducts.Quantity %></td>
+          <td><%= AllProducts.Category %></td>
+          <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  <%= AllProducts.Image %>
+</button></td>
+
+
+
+        </tr>
+
+
+
+
+  </tbody>
+</table>
+<div style="margin-top : 100px;">
+  <a  href="/dashboard">Home</a>
+</div>
+
+</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Image</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img style = "text-align : center;"  src="../../../uploads/<%= AllProducts.Image %>" alt="No image">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

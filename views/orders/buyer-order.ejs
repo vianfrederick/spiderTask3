@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>WhiteFalls</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style media="screen">
+
+  .product-table{
+    margin-top : 50px;
+  }
+
+  .heading{
+    margin-top : 100px;
+  }
+</style>
+</head>
+<body>
+
+<div style="border : 1px solid black; padding:10px; margin-top : 50px;  margin-bottom : 50px;" class="container">
+  <h1 style="margin-bottom:20px;" class="display-4 heading">Order History</h1>
+
+
+  <table  class="table table-bordered product-table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product Name // Product ID</th>
+      <th scope="col">Seller Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Date/Time</th>
+      <th scope="col">Price</th>
+      <th scope="col">Category</th>
+      <th scope="col">Description</th>
+      <th scope="col">Image</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <% if(orderHistory.length > 0){ %>
+      <% for(var i = 0; i < orderHistory.length ; i++){ %>
+        <tr>
+          <th scope="row"><%= i+1 %></th>
+          <td><%= orderHistory[i].ProductName %> // <%= orderHistory[i].ProductID %></td>
+          <td><%= orderHistory[i].SellerName %></td>
+          <td><%= orderHistory[i].Quantity %></td>
+          <td><%= orderHistory[i].Date %></td>
+          <td><%= orderHistory[i].Price %></td>
+          <td><%= orderHistory[i].Category %></td>
+          <td><%= orderHistory[i].Description %></td>
+          <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%= i %>">
+            <%= orderHistory[i].Image %>
+          </button></td>
+
+
+        </tr>
+        <div class="modal fade" id="<%= i %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img src="../uploads/<%= orderHistory[i].Image %>" alt="No Image">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+<%      }}  %>
+
+
+
+  </tbody>
+</table>
+
+<div style="margin-top : 100px;">
+  <a  href="/dashboard">Home</a>
+</div>
+</div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

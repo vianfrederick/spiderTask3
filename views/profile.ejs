@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/images/favicon.ico">
+<style>
+body{
+  display:flex;
+  justify-content : center;
+  text-align : center;
+}
+
+.profile-box{
+  text-align : center;
+  width: 500px;
+  height:500px;
+}
+
+
+.profile-box h1{
+  font-size: 50px;
+  line-height: 22px;
+  color: Green;
+
+}
+
+.profile-box table{
+  width : 100%;
+  border-collapse: collapse;
+  margin: 30px 0;
+}
+
+.profile-box table td{
+  border: 1px solid #cccccc;
+  padding: 10px 15px;
+  font-weight: 500;
+  color: black;
+  width: 100%;
+  font-size: 28px;
+}
+
+.profile-box .btn{
+margin-right: 70px;
+margin-left: 70px;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+  <div class="profile-box">
+          <h1>Profile</h1>
+          <table>
+            <tr>
+              <td>Name</td>
+              <td><span><%= name %></span></td>
+            </tr>
+
+            <tr>
+              <td>User-Name</td>
+              <td><span><%= username %></span></td>
+            </tr>
+            <tr>
+              <td>Email Address</td>
+              <td><span><%= email %></span></td>
+            </tr>
+            <tr>
+              <td>Mode</td>
+              <td><span><%= mode %></span></td>
+            </tr>
+
+
+          </table>
+
+
+          <button  style = "margin-left: 27%; font-size : 29px;background-color : red;" class="btn" type="button" name="button">Delete my account</button>
+  </div>
+
+
+<div id="myModal" class="modal">
+
+
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div class="confirm hide">
+      <h2>All of your records would get deleted!!
+      Think again before you submit</h2>
+<form  action="/delete" method="get">
+  <button type="submit" name="button" style="height: 48px;width: 113px;font-size: 28px;border-radius: 15px;background-color: red;">Submit</button>
+</form>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+var modal = document.getElementById("myModal");
+
+
+var btn = document.querySelector(".btn");
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>

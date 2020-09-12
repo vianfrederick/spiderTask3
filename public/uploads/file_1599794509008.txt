@@ -1,0 +1,16 @@
+;================ Start of Scanner Results ==================
+12-10-2019 22:13	F:\FROM DELL\Downloads\SoftonicDownloader_for_king-translate.exe	is an Unwanted-Program ( 0040f81d1 )	Has been removed
+12-10-2019 22:13	F:\FROM DELL\Downloads\SoftonicDownloader_for_mipony.exe	is an Unwanted-Program ( 0040f81d1 )	Has been removed
+12-10-2019 22:13	F:\FROM DELL\Downloads\Software\SoftonicDownloader_for_eazel.exe	is an Unwanted-Program ( 0040f81d1 )	Has been removed
+12-10-2019 22:13	F:\FROM DELL\Downloads\Software\iLividSetup-r1893-n-bi.exe	is an Adware ( 005524301 )	Has been removed
+12-10-2019 22:14	F:\FROM DELL\FreeTime\FormatFactory\FFModules\Package\BaiDu\hao123inst.exe	is an Adware ( 004c43921 )	Has been removed
+12-10-2019 22:14	F:\FROM DELL\GreenTree Applications\YTD Video Downloader\Uninstall.exe	is an Adware ( 004b8e091 )	Has been removed
+
+;------------------- Summary -------------------
+;Files Found             : 9205
+;Files Scanned           : 9205
+;Files Infected          : 6
+;Partition Table Scanned : None
+;Boot Sectors Scanned    : 1
+;Issues to be fixed      : None
+;================ End of Scanner Results ==================
