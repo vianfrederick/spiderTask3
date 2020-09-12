@@ -1690,6 +1690,7 @@ app.post("/dashboard/SearchResultsBuyer",function(req,res){
 
 app.get("/graph",function(req,res){
   if(req.isAuthenticated()){
+    if(req.user.Mode == "Seller"){
     var finalArray = []
     BuyerProducts.find({},function(err,foundPerson){
       if(!err){
@@ -1722,6 +1723,15 @@ res.render("graph",{details : arr1});
         }
       }
     })
+  }
+  else{
+    req.flash('success_msg','You are not a Seller');
+    res.redirect("/login");
+  }
+  }
+  else{
+    req.flash('success_msg','You must Log in to continue');
+    res.redirect("/login");
   }
 })
 

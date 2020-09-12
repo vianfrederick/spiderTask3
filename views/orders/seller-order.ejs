@@ -19,13 +19,9 @@
 </head>
 <body>
 
-<div style="border : 1px solid black; padding:10px; margin-top : 50px;  margin-bottom : 50px;" class="container">
+<div style="border : 1px solid black; padding:10px; margin-top : 50px;  margin-bottom : 50px;position : relative;" class="container">
   <h1 style="margin-bottom:20px;" class="display-4 heading">History</h1>
-  <div  class="errors">
-    <% if(success_msg != ''){ %>
-      <h4 style = "background-color : lightgreen; padding-left : 20px;"><%= success_msg %></h4>
-  <%  } %>
-  </div>
+
 
 
   <table  class="table table-bordered product-table">
@@ -55,9 +51,33 @@
           <td><%= purchaseDetails[i].Price %></td>
           <td><%= purchaseDetails[i].Category %></td>
           <td><%= purchaseDetails[i].Description %></td>
-          <td><%= purchaseDetails[i].Image %></td>
+          <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#<%= i %>">
+            <%= purchaseDetails[i].Image %>
+          </button></td>
 
 
+
+
+
+          <div class="modal fade" id="<%= i %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Image</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <img src="../uploads/<%= purchaseDetails[i].Image %>" alt="">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+              </div>
+            </div>
+          </div>
         </tr>
 <%      }}  %>
 
@@ -67,33 +87,11 @@
 </table>
 
 <div style="margin-top : 100px;">
-  <a  href="/dashboard">Home</a>
+  <a   href="/dashboard">Home</a>
 </div>
+<a style="position:absolute; top:97%; left:88%;" class="btn btn-outline-success" href="/graph">Show Graph</a>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title" id="exampleModalLabel">Alert !!!!</h1>
-
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <h5>Are you sure want to clear everything?</h5>
-      </div>
-      <div class="modal-footer">
-        <form class="" action="/dashboard/viewProducts/clearAll" method="get">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          <button type="submit" class="btn btn-primary">Yes, Proceed</button>
-        </form>
-
-      </div>
-    </div>
-  </div>
-</div>
 
 
 
