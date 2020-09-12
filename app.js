@@ -923,6 +923,26 @@ app.get("/dashboard/profile",function(req,res){
 
 app.get("/delete",function(req,res){
   if(req.isAuthenticated()){
+
+      CompleteProduct.deleteMany({Username : req.user.Username},function(err){
+        if(!err){
+          console.log("Deleted Account");
+        }
+      });
+      if(req.User.Mode == "Buyer"){
+        BuyerProducts.deleteOne({Username : req.user.Username},function(err){
+          if(!err){
+            console.log("Deleted Account");
+          }
+        });
+      }
+      else{
+        SellerProducts.deleteOne({Username : req.user.Username},function(err){
+          if(!err){
+            console.log("Deleted Account");
+          }
+        });
+      }
       User.deleteOne({Emailaddress : req.user.Emailaddress},function(err){
         if(!err){
           req.flash('success_msg',"Successfully deleted");
@@ -1067,8 +1087,13 @@ app.get("/dashboard/viewProducts/editProducts",function(req,res){
       res.render("edit-products",{editProduct : editProduct});
     }
     else{
-
+      req.flash('success_msg',"You are not a Seller");
+      res.redirect("/login");
     }
+  }
+  else{
+    req.flash('success_msg',"You must log in to continue");
+    res.redirect("/login");
   }
 
 });
